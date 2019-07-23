@@ -1,0 +1,40 @@
+INCLUDE "EMU8086.INC"
+.MODEL SMALL
+.STACK 100H
+.CODE
+
+MIAN PROC
+    PRINT "ENTER DIVISOR :"
+    
+    MOV AH,1
+    INT 21H
+    MOV BL,AL
+    SUB BL,30H
+    
+    PRINTN
+    PRINT "ENTER DIVIDEND: "
+    
+    MOV AH,1
+    INT 21H
+    SUB AL,30H
+    MOV AH,0
+    
+    DIV BL
+    ADD BH,30H
+    ADD BL,30H
+    
+    
+    PRINTN
+    PRINT "OVOTIENT: "
+    MOV AH,2
+    MOV DL,BL
+    INT 21H
+    
+    PRINTN
+    PRINT "REMAINDER: "
+    MOV AH,2
+    MOV DL,BH
+    INT 21H
+    
+    
+    EXIT:
